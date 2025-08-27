@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Το Ζουμερό – Κοτοπουλάδικο στη Γειτονιά</title>
+  <meta name="description" content="Κοτόπουλο σούβλας, φτερούγες, πατάτες και σπιτικές σαλάτες. Παράδοση στη γειτονιά σου γρήγορα και οικονομικά." />
+  <meta name="theme-color" content="#a62100" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff9f5;        /* φόντο σαν χαρτί ψησταριάς */
+      --card:#ffffff;
+      --ink:#201a18;
+      --brand:#a62100;     /* ζουμερό κόκκινο */
+      --accent:#f5c451;    /* χρυσοψημένο */
+      --muted:#7a6f6a;
+      --ring: 0 8px 30px rgba(166,33,0,.15);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink); background:var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1100px, 92vw); margin-inline:auto}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(1.1) blur(10px);
+      background:color-mix(in oklab, var(--bg) 70%, white 30% / 80%);
+      border-bottom:1px solid #0001;
+    }
+    .nav{display:flex; align-items:center; gap:18px; padding:10px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800}
+    .logo{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg,var(--brand),#ff5a2a); box-shadow:var(--ring); display:grid; place-items:center}
+    .logo svg{width:22px; height:22px; fill:white}
+    .navlinks{margin-left:auto; display:flex; gap:18px; align-items:center}
+    .navlinks a{padding:8px 10px; border-radius:10px}
+    .navlinks a:hover{background:#00000008}
+    .cta{background:var(--brand); color:#fff; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow:var(--ring)}
+    .cta:hover{filter:brightness(1.05)}
+    .hamburger{display:none; margin-left:auto; background:#0000; border:0; padding:8px}
+
+    /* Hero */
+    .hero{padding:56px 0 24px}
+    .hero .wrap{display:grid; grid-template-columns: 1.05fr .95fr; gap:28px; align-items:center}
+    .kicker{color:var(--brand); font-weight:800; letter-spacing:.08em; text-transform:uppercase}
+    h1{font-size:clamp(28px, 3.4vw + 12px, 54px); line-height:1.05; margin:8px 0 14px}
+    .lead{color:var(--muted); font-size:18px; max-width:44ch}
+    .actions{display:flex; gap:12px; margin-top:18px}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid #0002; background:white; font-weight:700}
+    .btn:hover{background:#fff7f4}
+    .btn.primary{background:var(--brand); color:white; border-color:transparent}
+
+    .heroimg{position:relative; border-radius:22px; overflow:hidden; box-shadow:var(--ring); background:
+      linear-gradient(180deg,#0000, #00000020),
+      url('https://images.unsplash.com/photo-1604908176997-4312297f4d2e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      min-height:340px;
+    }
+    .price-tag{position:absolute; right:14px; top:14px; background:var(--accent); color:#4a2d00; padding:8px 12px; font-weight:800; border-radius:999px; box-shadow:var(--ring)}
+
+    /* Sections */
+    section{padding:36px 0}
+    h2{font-size:clamp(22px, 2vw + 14px, 34px); margin:0 0 14px}
+    .sub{color:var(--muted)}
+
+    /* Menu grid */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px}
+    .card{grid-column: span 4; background:var(--card); border:1px solid #0000000f; border-radius:var(--radius); box-shadow:var(--ring); padding:14px}
+    .card h3{margin:6px 0 4px}
+    .price{font-weight:800; color:var(--brand)}
+    .chip{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #0002; color:#5a514d}
+
+    /* Offers */
+    .offer{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px; border:1px dashed #0002; border-radius:var(--radius); background:#fffdf6}
+    .offer strong{color:var(--brand)}
+
+    /* Delivery */
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px}
+
+    /* Hours */
+    .hours{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .list{padding:14px; background:var(--card); border:1px solid #0000000f; border-radius:var(--radius)}
+    .list li{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #0001}
+    .list li:last-child{border-bottom:0}
+    .open-now{display:inline-block; padding:6px 10px; border-radius:999px; background:#eaffea; border:1px solid #10b98133; color:#065f46; font-weight:700}
+
+    /* Contact */
+    form{display:grid; gap:10px}
+    input, textarea{padding:12px 14px; border-radius:12px; border:1px solid #0002; font:inherit; background:white}
+    textarea{min-height:120px}
+
+    /* Footer */
+    footer{padding:30px 0; color:#6b615c}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero .wrap{grid-template-columns: 1fr;}
+      .card{grid-column: span 6}
+      .hours{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .hamburger{display:inline-flex}
+    }
+    @media (max-width: 640px){
+      .card{grid-column: span 12}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Αρχική">
+        <span class="logo" aria-hidden="true">
+          <!-- απλό κοτο-εικονίδιο -->
+          <svg viewBox="0 0 24 24" role="img" aria-label="logo"><path d="M12 2c1.2 0 2 .8 2 2v1c1.6 0 3 .8 3 2v1c2 1 3 3.1 3 5.1 0 3.8-3.4 6.9-8 6.9s-8-3.1-8-6.9c0-2 1-4.1 3-5.1V7c0-1.2 1.4-2 3-2V4c0-1.2.8-2 2-2Zm7 5-1.5-.8c-.5-.3-.7-.9-.4-1.4l.8-1.5 1.5.8c.5.3.7.9.4 1.4L19 7Z"/></svg>
+        </span>
+        <span>Το Ζουμερό</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Κύρια πλοήγηση">
+        <a href="#menu">Μενού</a>
+        <a href="#offers">Προσφορές</a>
+        <a href="#delivery">Παράδοση</a>
+        <a href="#hours">Ωράριο</a>
+        <a href="#contact">Επικοινωνία</a>
+        <a class="cta" href="tel:+302100000000">Παραγγελία: 21 0000 0000</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Άνοιγμα μενού" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="hero">
+    <div class="container wrap">
+      <div>
+        <div class="kicker">Από το 2005</div>
+        <h1>Κοτόπουλο σούβλας & street food <br/>όπως το θέλεις.</h1>
+        <p class="lead">Ζουμερό, τραγανό και πάντα φρέσκο. Παράδοση στη γειτονιά, παραλαβή από το κατάστημα ή τηλεφωνική παραγγελία.</p>
+        <div class="actions">
+          <a class="btn primary" href="tel:+302100000000">📞 Κάλεσέ μας τώρα</a>
+          <a class="btn" href="#menu">Δες το μενού</a>
+        </div>
+      </div>
+      <div class="heroimg" role="img" aria-label="Σούβλα με κοτόπουλο">
+        <span class="price-tag">Ολόκληρο σούβλας 11,90€</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="container">
+      <h2>Μενού</h2>
+      <p class="sub">Ενδεικτικές τιμές – προσαρμόστε όπως θέλετε.</p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="chip">Σούβλα</div>
+          <h3>Κοτόπουλο ολόκληρο</h3>
+          <p>Μαρινάδα με θυμάρι & πάπρικα, ψημένο αργά.</p>
+          <div class="price">11,90€</div>
+        </article>
+        <article class="card">
+          <div class="chip">Σούβλα</div>
+          <h3>Μισό κοτόπουλο</h3>
+          <p>Ιδανικό για 1–2 άτομα.</p>
+          <div class="price">6,90€</div>
+        </article>
+        <article class="card">
+          <div class="chip">Street</div>
+          <h3>Φτερούγες (8τμχ)</h3>
+          <p>BBQ, καυτερή ή λεμόνι‑ρίγανη.</p>
+          <div class="price">7,50€</div>
+        </article>
+        <article class="card">
+          <div class="chip">Street</div>
+          <h3>Chicken Box</h3>
+          <p>Μπουκιές κοτόπουλου + πατάτες + σως.</p>
+          <div class="price">8,90€</div>
+        </article>
+        <article class="card">
+          <div class="chip">Sides</div>
+          <h3>Πατάτες country</h3>
+          <p>Χειροποίητες, τραγανές.</p>
+          <div class="price">3,20€</div>
+        </article>
+        <article class="card">
+          <div class="chip">Σαλάτες</div>
+          <h3>Χωριάτικη</h3>
+          <p>Ντομάτα, αγγούρι, φέτα, ελιά, ρίγανη.</p>
+          <div class="price">5,50€</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offers -->
+  <section id="offers">
+    <div class="container">
+      <h2>Προσφορές</h2>
+      <div class="offer">
+        <p><strong>Δευτέρα – Πέμπτη:</strong> 2 μισά κοτόπουλα + πατάτες μόνο <strong>12,90€</strong></p>
+        <a class="btn" href="tel:+302100000000">Πάρε προσφορά 📞</a>
+      </div>
+      <div class="offer" style="margin-top:10px">
+        <p><strong>Φοιτητικό -10%</strong> με επίδειξη πάσου (στο κατάστημα).</p>
+        <a class="btn" href="#contact">Μάθε περισσότερα</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery -->
+  <section id="delivery">
+    <div class="container">
+      <h2>Παράδοση & Τρόποι Παραγγελίας</h2>
+      <p class="sub">Εξυπηρετούμε ακτίνα 3km από το κατάστημα. Εκτιμώμενος χρόνος: 25–35'.</p>
+      <div class="cta-row" style="margin-top:10px">
+        <a class="btn primary" href="tel:+302100000000">Τηλέφωνο παραγγελίας</a>
+        <a class="btn" href="https://www.wolt.com/" target="_blank" rel="noopener">Παράγγειλε μέσω Wolt</a>
+        <a class="btn" href="https://www.e-food.gr/" target="_blank" rel="noopener">Παράγγειλε μέσω e‑food</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Location -->
+  <section id="hours">
+    <div class="container">
+      <h2>Ωράριο & Τοποθεσία</h2>
+      <div class="hours">
+        <ul class="list" aria-label="Ωράριο λειτουργίας">
+          <li><span>Δευτέρα</span><span>12:00 – 23:30</span></li>
+          <li><span>Τρίτη</span><span>12:00 – 23:30</span></li>
+          <li><span>Τετάρτη</span><span>12:00 – 23:30</span></li>
+          <li><span>Πέμπτη</span><span>12:00 – 23:30</span></li>
+          <li><span>Παρασκευή</span><span>12:00 – 00:30</span></li>
+          <li><span>Σάββατο</span><span>12:00 – 00:30</span></li>
+          <li><span>Κυριακή</span><span>12:30 – 23:30</span></li>
+        </ul>
+        <div class="list">
+          <p><strong>Διεύθυνση:</strong> Παράδειγμα 12, Γειτονιά, 11111</p>
+          <p style="margin:10px 0"><span class="open-now" id="openBadge">Έλεγχος ανοικτά...</span></p>
+          <p>
+            <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?q=Παράδειγμα 12, Γειτονιά">Δες στο Google Maps</a>
+            <a class="btn" href="mailto:orders@tozoumero.gr">orders@tozoumero.gr</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2>Επικοινωνία</h2>
+      <p class="sub">Στείλε μας μήνυμα για κρατήσεις, εκδηλώσεις ή feedback.</p>
+      <form action="mailto:orders@tozoumero.gr" method="post" enctype="text/plain">
+        <input name="name" placeholder="Όνομα" required />
+        <input name="phone" placeholder="Τηλέφωνο" />
+        <textarea name="message" placeholder="Μήνυμα" required></textarea>
+        <button class="btn primary" type="submit">Αποστολή</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+      <small>© <span id="year"></span> Το Ζουμερό · Όλα τα δικαιώματα διατηρούνται</small>
+      <div style="display:flex; gap:10px">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <span aria-hidden="true">·</span>
+        <a href="#" aria-label="Facebook">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle (απλό)
+    const burger = document.getElementById('hamburger');
+    const nav = document.querySelector('.navlinks');
+    burger?.addEventListener('click', () => {
+      const open = nav.style.display === 'flex';
+      nav.style.display = open ? 'none' : 'flex';
+      burger.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Έτος footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Απλός έλεγχος «Ανοιχτά τώρα» (με βάση τοπική ώρα browser)
+    // Προσαρμόστε ώρες αν αλλάξουν
+    const ranges = {
+      1: ['12:00','23:30'], // Δευτέρα
+      2: ['12:00','23:30'], // Τρίτη
+      3: ['12:00','23:30'], // Τετάρτη
+      4: ['12:00','23:30'], // Πέμπτη
+      5: ['12:00','24:30'], // Παρασκευή
+      6: ['12:00','24:30'], // Σάββατο
+      0: ['12:30','23:30'], // Κυριακή (0)
+    };
+    function parseHM(hm){
+      const [h,m] = hm.split(':').map(Number); return h*60+m;
+    }
+    function checkOpen(){
+      const now = new Date();
+      const day = now.getDay();
+      const mins = now.getHours()*60 + now.getMinutes();
+      const r = ranges[day];
+      const el = document.getElementById('openBadge');
+      if(!r || !el) return;
+      const openM = parseHM(r[0]);
+      const closeM = parseHM(r[1]);
+      const open = mins >= openM && mins <= closeM;
+      el.textContent = open ? 'Ανοιχτά τώρα' : 'Κλειστά αυτή τη στιγμή';
+      el.style.background = open ? '#eaffea' : '#ffeeee';
+      el.style.color = open ? '#065f46' : '#7f1d1d';
+      el.style.borderColor = open ? '#10b98133' : '#ef444433';
+    }
+    checkOpen();
+  </script>
+</body>
+</html>
